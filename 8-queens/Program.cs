@@ -10,14 +10,17 @@ namespace _8_queens
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("(multi-row support coming to stores near you");
-            Console.Write("Give column (number) to place queen in first row: ");
-            int queenStartColumn = Convert.ToInt32(Console.ReadLine()) - 1;
+            int boardSize = Text.InputBoardSize("What size would you like your board to be? ");
+            BoardState board = new BoardState(boardSize);
 
-            BoardState board = new BoardState(8).PlaceQueen(queenStartColumn);
+            Console.WriteLine("Here's what your board looks like:");
+            board.Display();
+
+            int placementRow = Text.InputBoardPosition("Based on the above, where would you like to place the first queen? ", out int placementColumn, boardSize);
+            board.State[placementRow] = placementColumn;
 
             Console.WriteLine("Starting board:");
-            board.DisplayBoard();
+            board.Display();
             Console.ReadLine();
 
             board.Iterate();

@@ -33,7 +33,7 @@ namespace _8_queens
             if (GetCurrentRow() == -1)
             {
                 Console.WriteLine("A solution:");
-                DisplayBoard();
+                Display();
                 Console.ReadLine();
                 return;
             }
@@ -53,28 +53,30 @@ namespace _8_queens
             return new BoardState(newState);
         }
 
-        private bool isValidPlacement(int column)
+        private bool isValidPlacement(int target)
         {
-            return isColumnClear(column) && areDiagonalsClear(column);
+            return isColumnClear(target) && areDiagonalsClear(target);
         }
 
-        private bool isColumnClear(int column)
+        private bool isColumnClear(int target)
         {
-            for (int i = 0; i < GetCurrentRow(); i++)
+            for (int i = 0; i < Size; i++)
             {
-                if (State[i] == column)
+                int check = State[i];
+                if (check != -1 && check == target)
                     return false;
             }
 
             return true;
         }
 
-        private bool areDiagonalsClear(int column)
+        private bool areDiagonalsClear(int target)
         {
-            for (int i = 0; i < GetCurrentRow(); i++)
+            for (int i = 0; i < Size; i++)
             {
-                int distanceAway = GetCurrentRow() - i;
-                if (State[i] - distanceAway == column || State[i] + distanceAway == column)
+                int check = State[i];
+                int distance = GetCurrentRow() - i;
+                if (check != -1 && (check - distance == target || check + distance == target))
                     return false;
             }
 
@@ -86,7 +88,7 @@ namespace _8_queens
             return Array.IndexOf(State, -1);
         }
 
-        public void DisplayBoard()
+        public void Display()
         {
             Text.Board.PrintColumnHeaders(Size);
             for (int i = 0; i < Size; i++)

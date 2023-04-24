@@ -10,11 +10,52 @@ namespace _8_queens
     {
         public static char[] alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
 
+        public static int InputBoardSize(string message)
+        {
+            Console.Write(message);
+
+            while (true)
+            {
+                int input;
+                if (int.TryParse(Console.ReadLine(), out input) && input > 0 && input <= alpha.Length)
+                    return input;
+                Console.Write($"Please enter a value greater than zero and less than {alpha.Length}: ");
+            }
+        }
+
+        public static int InputBoardPosition(string message, out int column, int boardSize)
+        {
+            Console.Write(message);
+
+            while (true)
+            {
+                string input = Console.ReadLine();
+
+                if (char.IsLetter(input[0]))
+                {
+                    char columnDisplay = char.ToUpper(input[0]);
+                    if (alpha.Contains(columnDisplay))
+                    {
+                        column = Array.IndexOf(alpha, columnDisplay);
+                        if (int.TryParse(input.Substring(1, input.Length - 1), out int rowDisplay))
+                        {
+                            int row = rowDisplay - 1;
+                            if (row >= 0 && row < boardSize && column < boardSize)
+                            {
+                                return row;
+                            }
+                        }
+                    }
+                }
+                Console.Write($"Please enter a valid position (such as: \"a5\"): ");
+            }
+        }
+
         public static class Board
         {
             public static void PrintColumnHeaders(int length)
             {
-                Console.Write($"  ");
+                Console.Write($"   ");
                 for (int i = 0; i < length; i++)
                     Console.Write($" {alpha[i]}");
                 Console.WriteLine();
@@ -22,7 +63,12 @@ namespace _8_queens
 
             public static void PrintRow(int row, int length, int queenPosition = -1)
             {
-                Console.Write($" {row + 1}");
+                int displayRow = row + 1;
+                if (displayRow < 10)
+                    Console.Write($"  {displayRow}");
+                else
+                    Console.Write($" {displayRow}");
+                
                 for (int i = 0; i < length; i++)
                 {
                     if (queenPosition == i)
