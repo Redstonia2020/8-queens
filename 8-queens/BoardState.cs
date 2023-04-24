@@ -9,10 +9,13 @@ namespace _8_queens
 {
     internal class BoardState
     {
-        public int[] State = new int[8];
+        public int Size = 8;
+        public int[] State;
 
-        public BoardState()
+        public BoardState(int size)
         {
+            Size = size;
+            State = new int[Size];
             for (int i = 0; i < State.Length; i++)
             {
                 State[i] = -1;
@@ -22,6 +25,7 @@ namespace _8_queens
         public BoardState(int[] state)
         {
             State = state;
+            Size = state.Length;
         }
 
         public void Iterate()
@@ -84,17 +88,10 @@ namespace _8_queens
 
         public void DisplayBoard()
         {
-            foreach (int columnInRow in State)
+            Text.Board.PrintColumnHeaders(Size);
+            for (int i = 0; i < Size; i++)
             {
-                for (int i = 0; i < 8; i++)
-                {
-                    if (columnInRow == i)
-                        Console.Write(" *");
-                    else
-                        Console.Write(" -");
-                }
-
-                Console.WriteLine();
+                Text.Board.PrintRow(i, Size, State[i]);
             }
         }
     }

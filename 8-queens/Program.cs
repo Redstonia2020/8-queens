@@ -14,7 +14,7 @@ namespace _8_queens
             Console.Write("Give column (number) to place queen in first row: ");
             int queenStartColumn = Convert.ToInt32(Console.ReadLine()) - 1;
 
-            BoardState board = new BoardState().PlaceQueen(queenStartColumn);
+            BoardState board = new BoardState(8).PlaceQueen(queenStartColumn);
 
             Console.WriteLine("Starting board:");
             board.DisplayBoard();
