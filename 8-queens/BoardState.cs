@@ -32,7 +32,7 @@ namespace _8_queens
         {
             if (GetCurrentRow() == -1)
             {
-                Console.WriteLine("A solution:");
+                Console.WriteLine("Here's a solution:");
                 Display();
                 Console.ReadLine();
                 return;

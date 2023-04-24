@@ -19,7 +19,7 @@ namespace _8_queens
             int placementRow = Text.InputBoardPosition("Based on the above, where would you like to place the first queen? ", out int placementColumn, boardSize);
             board.State[placementRow] = placementColumn;
 
-            Console.WriteLine("Starting board:");
+            Console.WriteLine("Your piece has been placed!");
             board.Display();
             Console.ReadLine();
 
