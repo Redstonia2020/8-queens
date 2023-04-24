@@ -9,7 +9,7 @@ namespace _8_queens
 {
     internal class BoardState
     {
-        public int Size = 8;
+        public int Size;
         public int[] State;
 
         public BoardState(int size)
@@ -38,7 +38,7 @@ namespace _8_queens
                 return;
             }
 
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < Size; i++)
             {
                 if (isValidPlacement(i))
                     PlaceQueen(i).Iterate();
