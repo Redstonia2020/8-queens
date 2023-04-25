@@ -23,7 +23,7 @@ namespace _8_queens
             }
         }
 
-        public static int InputBoardPosition(string message, out int column, int boardSize)
+        public static BoardPosition InputBoardPosition(string message, int boardSize)
         {
             Console.Write(message);
 
@@ -36,13 +36,13 @@ namespace _8_queens
                     char columnDisplay = char.ToUpper(input[0]);
                     if (alpha.Contains(columnDisplay))
                     {
-                        column = Array.IndexOf(alpha, columnDisplay);
+                        int column = Array.IndexOf(alpha, columnDisplay);
                         if (int.TryParse(input.Substring(1, input.Length - 1), out int rowDisplay))
                         {
                             int row = rowDisplay - 1;
                             if (row >= 0 && row < boardSize && column < boardSize)
                             {
-                                return row;
+                                return new BoardPosition(row, column);
                             }
                         }
                     }

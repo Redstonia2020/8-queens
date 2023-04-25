@@ -11,19 +11,19 @@ namespace _8_queens
         static void Main(string[] args)
         {
             int boardSize = Text.InputBoardSize("What size would you like your board to be? ");
-            BoardState board = new BoardState(boardSize);
+            Board board = new Board(boardSize);
 
             Console.WriteLine("Here's what your board looks like:");
             board.Display();
 
-            int placementRow = Text.InputBoardPosition("Based on the above, where would you like to place the first queen? ", out int placementColumn, boardSize);
-            board.State[placementRow] = placementColumn;
+            BoardPosition placementPos = Text.InputBoardPosition("Based on the above, where would you like to place the first queen? ", boardSize);
+            board.QueenPositions[placementPos.Row] = placementPos.Column;
 
             Console.WriteLine("Your piece has been placed!");
             board.Display();
             Console.ReadLine();
 
-            board.Iterate();
+            board.Proceed();
 
             Console.ReadLine();
         }
