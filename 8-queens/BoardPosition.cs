@@ -16,5 +16,12 @@ namespace _8_queens
             Row = row;
             Column = column;
         }
+
+        public bool isValid(int boardSize)
+        {
+            bool rowValid = Row >= 0 && Row < boardSize;
+            bool columnValid = Column >= 0 && Column < boardSize;
+            return rowValid && columnValid;
+        }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,24 +32,18 @@ namespace _8_queens
             while (true)
             {
                 string input = Console.ReadLine();
+                
+                char columnDisplay = char.ToUpper(input[0]);
+                int column = Array.IndexOf(alpha, columnDisplay);
 
-                if (char.IsLetter(input[0]))
+                if (int.TryParse(input.Substring(1, input.Length - 1), out int rowDisplay))
                 {
-                    char columnDisplay = char.ToUpper(input[0]);
-                    if (alpha.Contains(columnDisplay))
-                    {
-                        int column = Array.IndexOf(alpha, columnDisplay);
-                        if (int.TryParse(input.Substring(1, input.Length - 1), out int rowDisplay))
-                        {
-                            int row = rowDisplay - 1;
-                            if (row >= 0 && row < boardSize && column < boardSize)
-                            {
-                                return new BoardPosition(row, column);
-                            }
-                        }
-                    }
+                    int row = rowDisplay - 1; // convert 1-based to 0-based
+                    BoardPosition pos = new BoardPosition(row, column);
+                    if (pos.isValid(boardSize))
+                        return pos;
                 }
-                Console.Write($"Please enter a valid position (such as: \"a5\"): ");
+                Console.Write("Please enter a valid position (such as: \"a5\"): ");
             }
         }
 
@@ -68,7 +64,7 @@ namespace _8_queens
                     Console.Write($"  {displayRow}");
                 else
                     Console.Write($" {displayRow}");
-                
+
                 for (int i = 0; i < length; i++)
                 {
                     if (queenPosition == i)
