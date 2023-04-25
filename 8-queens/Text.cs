@@ -36,7 +36,7 @@ namespace _8_queens
                 char columnDisplay = char.ToUpper(input[0]);
                 int column = Array.IndexOf(alpha, columnDisplay);
 
-                if (int.TryParse(input.Substring(1, input.Length - 1), out int rowDisplay))
+                if (int.TryParse(input.Substring(1), out int rowDisplay))
                 {
                     int row = rowDisplay - 1; // convert 1-based to 0-based
                     BoardPosition pos = new BoardPosition(row, column);
